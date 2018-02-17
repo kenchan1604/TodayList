@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+           var xhr = new XMLHttpRequest();
+           //格式、網址、是否同步
+           //格式 :get/ post
+           xhr.open('get','https://hexschool.github.io/ajaxHomework/data.json',true)
+           //空的資料
+           xhr.send(null);
+           xhr.onload = function(){
+                console.log(xhr.responseText);
+                var str = JSON.parse(xhr.responseText);
+                document.querySelector('.message')
+                .textContent =str[0].name
+           }
+        </script>
+        <div class='message'></div>
+    </body>
+</html>
