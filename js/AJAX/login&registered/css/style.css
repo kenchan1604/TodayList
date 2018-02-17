@@ -1,0 +1,41 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+#messagebox{
+  margin: 20px;
+}
+.tablebox {
+  position: relative;
+  margin: 200px auto;
+  width: 80%;
+  padding: 50px;
+  border-radius: 10px;
+  background: #ffb4b4;
+  text-align: center;
+  font-family: 微軟正黑體;
+}
+.tablebox label {
+    padding: 4px 10px;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+    outline: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.tablebox input {
+    color: #000;
+    background: #fff;
+}
+.signupbtn,.signinbtn{
+  margin: 20px;
+  padding: 10px;
+}
+
+.fail{
+  color: #e91e63;
+}
+.success{
+  color: #14ff1e;
+}
