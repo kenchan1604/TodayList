@@ -5,6 +5,12 @@ var signinbtn = document.querySelector('.signinbtn');
 signupbtn.addEventListener('click',signup,false);
 signinbtn.addEventListener('click',signin,false);
 
+function clearall(){
+    document.querySelector('.account').value = '';
+    document.querySelector('.password').value = '';
+    document.querySelector('#messagebox').textContent = '';    
+}
+
 function signup(){
     console.log('signup');
     var emailStr = document.querySelector('.account').value;
@@ -28,6 +34,7 @@ function signup(){
             alert("帳號註冊失敗！");
         }
     }
+    clearContent();
 }
 function signin(){
     console.log('signin');
@@ -52,4 +59,5 @@ function signin(){
             alert("此帳號不存在或帳號密碼錯誤！");
         }
     }
+    clearContent();
 }
