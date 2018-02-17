@@ -8,7 +8,7 @@ signinbtn.addEventListener('click',signin,false);
 function clearall(){
     document.querySelector('.account').value = '';
     document.querySelector('.password').value = '';
-    document.querySelector('#messagebox').textContent = '';    
+    document.querySelector('#messagebox').innerHTML = '';
 }
 
 function signup(){
@@ -34,7 +34,7 @@ function signup(){
             alert("帳號註冊失敗！");
         }
     }
-    clearContent();
+    clearall();
 }
 function signin(){
     console.log('signin');
@@ -59,5 +59,5 @@ function signin(){
             alert("此帳號不存在或帳號密碼錯誤！");
         }
     }
-    clearContent();
+    clearall();
 }
