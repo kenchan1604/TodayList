@@ -16,8 +16,7 @@
            xhr.onload = function(){
                 console.log(xhr.responseText);
                 var str = JSON.parse(xhr.responseText);
-                document.querySelector('.message')
-                .textContent =str[0].name
+                document.querySelector('.message').textContent =str[0].name
            }
         </script>
         <div class='message'></div>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="">
+    <!--<script src="http://connect.facebook.net/zh_TW/all.js"></script>-->
+    <title>FB</title>
+    <style type="text/css">
+      .fb-post {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+<div id="fb-root">
+  <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
+  <button class='testbtn' type="button">test</button>
+  <div class='message'></div>
+  <div class='message2'></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : 'APP KEY',
+        cookie           : true,
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v2.12'
+      });
+      FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+    };
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+      var message=document.querySelector('.message');
+      var message2=document.querySelector('.message2');
+      var testbtn=document.querySelector('.testbtn');
+
+      testbtn.addEventListener('click',testAPI3,false);
+
+      function statusChangeCallback(response) {
+        //console.log('statusChangeCallback');
+        //console.log(response);
+        if (response.status === 'connected') {
+          // 用戶已登入 Facebook，也已經登入應用程式
+          testAPI();
+          testAPI2();
+        } else if (response.status === 'not_authorized') {
+          // 戶已登入 Facebook，但尚未登入應用程式。
+          message.textContent = '請登入應用程式';
+        } else {
+          // unknown 用戶沒有登入 Facebook，因此您無法得知用戶是否已登入您的應用程式
+          message.textContent = '請登入Facebook';
+        }
+      }
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+    function testAPI() {
+      FB.api('/me', function(response) {
+        //console.log(response.name + '你已經成功登入');
+        message.textContent = response.name + '歡迎你登入!';
+      });
+    }
+    function fblogout() {
+      FB.logout(function(response) {
+      // 登出FB用戶
+      });
+      message.textContent = '你已經登出了!';
+    }
+    function testAPI2() {
+      var fbnode = '/237653529525' ;
+      var fbgetposts = 5 ;
+      var fbgetinfo = "posts.limit("+fbgetposts+")" ;
+      var fbinfo = ""+fbgetinfo+"";
+      FB.api(fbnode,'GET',{"fields":""+fbinfo},function(response) {
+        console.log(response);
+        var datalength = response.posts.data.length;
+        var allnews = '';
+        for(var i=0;i<datalength;i++){
+          //console.log(datalength);
+          var fbnews = '<li>'+ response.posts.data[i].message +'</li>';
+          allnews+=fbnews;
+        }
+        message2.innerHTML = allnews;
+      });
+    }
+
+    function testAPI3() {
+      FB.api('/237653529525','GET',{"fields":"posts.limit(5){link}"},function(response) {
+        if (response && !response.error) {
+          console.log(response);
+          var datalength = response.posts.data.length;
+          var allposts = '';
+          for(var x=0;x<datalength;x++){
+          var fbposts ="<li>"+ response.posts.data[x].link +"</li>";
+          allposts+=fbposts;
+          }
+        }
+        message2.innerHTML = allposts;
+      });
+    }
+
+    </script>
+</div>
+</div>  <!-- 一定要加 -->
+    </body>
+</html>
