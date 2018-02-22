@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="">
+    <!--<script src="http://connect.facebook.net/zh_TW/all.js"></script>-->
+    <title>FB</title>
+    <style type="text/css">
+      html, body {
+      height:100%;
+      width: 1024px;
+      margin: 0px auto;
+      }
+      #wrap {
+        position: relative;
+        margin:  0px auto ;
+        width: 1024px;
+        min-height: 100%;
+        background-color: #f5f5f5;
+      }
+      #bmihead{
+        height: 300px;
+        color: #FFD366;
+        background-color: #424242;
+      }
+      #logo{
+        position: absolute;
+        top: 92px;
+        left: 56px;
+        border-right: 117px solid transparent;
+        width: 117px;
+        height: 117px;
+        overflow:hidden;
+        filter:drop-shadow(117px 0px #FFD366);
+      }
+      #bmifrom{
+        position:absolute;
+        top:  15px;
+        left: 387px;
+        margin: 50px auto;
+      }
+      label{
+        font-size: 18px;
+        line-height: 21px;
+        color: #FFD366;
+      }
+      input{
+        width: 234px;
+        height: 40px;
+        padding: 0px 16px;
+        font-size: 24px;
+        line-height: 25px;
+        color: #fff;
+        background-color: #646464;
+        border: solid 2px #FFD366;
+        border-radius: 10px;
+        margin: 5px 0px 20px 0px;
+      }
+      #bmibut{
+        position:absolute;
+        top: 92px;
+        left: 690px;
+        width: 120px;
+        height: 120px;
+        color: #424242;
+        font-size: 24px;
+        line-height: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        border: none;
+        background-color:#FFD366;
+        border-radius:99em;
+      }
+      #bmimain{
+        text-align:center;
+        padding: 20px 0px 80px 0px;
+      }
+      #bmititle{
+        font-size: 24px;
+        line-height: 28px;
+      }
+      #bmifoot{
+        position:relative;
+        width:100%;
+        height:80px;
+        margin-top: -80px;
+        text-align: center;
+        background-color: #FFD366;
+        clear:both;
+      }
+      #bmifoot img{
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+        <div id="bmihead">
+          <img id="logo" src="./images/bmiclogo.png"/><br>
+            <form id="bmifrom">
+              <label>身高 cm</label><br>
+              <input type="number" name="quantity" min="30" max="500" placeholder="請輸入身高"><br>
+              <label>體重 kg</label><br>
+              <input type="number" name="quantity" min="10" max="800" placeholder="請輸入體重"><br>
+            </form>
+          <button id="bmibut" type="button">看結果</button>
+        </div>
+        <div id="bmimain">
+          <div id="bmititle">BMI 紀錄</div>
+        </div>
+    </div>
+        <div id="bmifoot">
+        <img src="./images/bmiclogo.png"/>
+        </div>
+      </div>
+  </body>
+</html>
