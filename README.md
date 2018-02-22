@@ -1,8 +1,13 @@
 ﻿# TodayList
 to do list on day
+2018/2/19<br>
+facebook登入<br>
+獲取專頁前五帖子<br>
+/js/fb/fblogin.html<br>
+http://kchkd.com/test/fblogin.html<br>
 
 2018/02/17 <br>
-AJAX 綜合練習(註冊及登入檢查)
+AJAX 綜合練習(註冊及登入檢查)<br>
 /js/AJAX/login&registered<br>
 https://github.com/hexschool/nodejs_ajax_tutorial
 
