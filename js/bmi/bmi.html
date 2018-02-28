@@ -5,11 +5,13 @@
     <meta name="Description" content="">
     <!--<script src="http://connect.facebook.net/zh_TW/all.js"></script>-->
     <title>FB</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <style type="text/css">
       html, body {
       height:100%;
       width: 1024px;
       margin: 0px auto;
+      font-family: 'Noto Sans', sans-serif;
       }
       #wrap {
         position: relative;
@@ -22,6 +24,7 @@
         height: 300px;
         color: #FFD366;
         background-color: #424242;
+        -webkit-user-select: none;
       }
       #logo{
         position: absolute;
@@ -40,6 +43,7 @@
         margin: 50px auto;
       }
       label{
+        font-family: .AppleSystemUIFont;
         font-size: 18px;
         line-height: 21px;
         color: #FFD366;
@@ -55,6 +59,7 @@
         border: solid 2px #FFD366;
         border-radius: 10px;
         margin: 5px 0px 20px 0px;
+        outline: none;/*去除超連結的虛線外框*/
       }
       #bmibut{
         position:absolute;
@@ -70,14 +75,127 @@
         border: none;
         background-color:#FFD366;
         border-radius:99em;
+        -webkit-user-select: none;
+        outline: none;/*去除超連結的虛線外框*/
+      }
+      #bmibut:hover{
+        box-shadow: 0 0 6px 3px rgba(255,196,50,0.64);
+      }
+      #bmibut:active{
+        box-shadow: none;
+        background-color:rgba(222,168,33,1);
+      }
+      #bmiresults{
+        position:absolute;
+        top: 92px;
+        left: 690px;
+        width: 120px;
+        height: 120px;
+        color: #86D73F;
+        font-size: 24px;
+        line-height: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        border: 6px solid #86D73F;
+        background-color:#424242;
+        border-radius:99em;
+        -webkit-user-select: none;
+        outline: none;/*去除超連結的虛線外框*/
+        float: left;
+      }
+      #bmiresults strong{
+        font-family: .AppleSystemUIFont;
+        font-size: 14px;
+        line-height: 17px;
+      }
+      #reset{
+        width: 30px
+        height: 30px;
+        position:absolute;
+        top: 180px;
+        left: 770px;
+        border-radius:99em;
+        background: #86D73F;
+        border: 3px solid #424242;
+      }
+      #bmiresultsname{
+        width: 64px;
+        position:absolute;
+        top: 130px;
+        left: 820px;
+        font-family: .SFNSDisplay;
+        font-size: 32px;
+        color: #86D73F;
       }
       #bmimain{
         text-align:center;
         padding: 20px 0px 80px 0px;
+        margin-bottom: 80px;
       }
       #bmititle{
         font-size: 24px;
         line-height: 28px;
+        margin: 20px auto;
+      }
+      .bmibox {
+        margin: 10px auto;
+        line-height: 62px;
+        width: 624px;
+        height: 62px;
+        background-color: #fff;
+      }
+      .bmicolor{
+        width: 7px;
+        line-height:62px;
+        float: left;
+        -webkit-user-select: none;
+      }
+      #good{
+        background-color: #86D73F;
+        box-shadow:3px 0px rgba(134,215,63,0.29);
+      }
+      #too-light{
+        background-color: #31BAF9;
+        box-shadow:3px 0px rgba(49,186,249,0.29);
+      }
+      #too-heavy{
+        background-color: #FF982D;
+        box-shadow:3px 0px rgba(255,152,45,0.29);
+      }
+      #mild-obese{
+        background-color: #FF6C03;
+        box-shadow:3px 0px rgba(255,108,3,0.29);
+      }
+      #moderately-fat{
+        background-color: #FF6C03;
+        box-shadow:3px 0px rgba(255,108,3,0.29);
+      }
+      #severe-obesity{
+        background-color: #FF1200;
+        box-shadow:3px 0px rgba(255,18,0,0.29);
+      }
+      .bmistatus{
+        width: 15%;
+        margin: 0px 20px;
+        font-size: 20px;
+        color: #4A4A4A;
+        text-align: left;
+        float: left;
+      }
+      .bminame{
+        width: 20%;
+        font-size: 12px;
+        color: #424242;
+        float: left;
+      }
+      .bminame strong{
+        margin: 0px 10px;
+        font-size: 20px;
+      }
+      .bmidata{
+        float: right;
+        font-size: 12px;
+        margin: 0px 15px;
       }
       #bmifoot{
         position:relative;
@@ -103,10 +221,65 @@
               <label>體重 kg</label><br>
               <input type="number" name="quantity" min="10" max="800" placeholder="請輸入體重"><br>
             </form>
-          <button id="bmibut" type="button">看結果</button>
+          <button id="bmiresults" type="button">
+            20.90<br><strong>BMI</strong>
+            <button id="reset" type="button">
+              <img src="./images/icons_loop.png">
+            </button>
+            <div id="bmiresultsname">理想</div>
+          </button>
+          <!--<button id="bmibut" type="button">看結果</button>-->
         </div>
         <div id="bmimain">
           <div id="bmititle">BMI 紀錄</div>
+          <div class="bmibox">
+            <div class="bmicolor" id="good">&nbsp;</div>
+            <div class="bmistatus">理想</div>
+            <div class="bminame">BMI <strong>20.90</strong> </div>
+            <div class="bminame">weight <strong>70kg</strong> </div>
+            <div class="bminame">height <strong>180cm</strong> </div>
+            <div class="bmidata">06-19-2017</div>
+          </div>
+          <div class="bmibox">
+            <div class="bmicolor" id="too-light">&nbsp;</div>
+            <div class="bmistatus">過輕</div>
+            <div class="bminame">BMI <strong>11.94</strong> </div>
+            <div class="bminame">weight <strong>40kg</strong> </div>
+            <div class="bminame">height <strong>180cm</strong> </div>
+            <div class="bmidata">06-19-2017</div>
+          </div>
+          <div class="bmibox">
+            <div class="bmicolor" id="too-heavy">&nbsp;</div>
+            <div class="bmistatus">過重</div>
+            <div class="bminame">BMI <strong>11.94</strong> </div>
+            <div class="bminame">weight <strong>40kg</strong> </div>
+            <div class="bminame">height <strong>180cm</strong> </div>
+            <div class="bmidata">06-19-2017</div>
+          </div>
+          <div class="bmibox">
+            <div class="bmicolor" id="mild-obese">&nbsp;</div>
+            <div class="bmistatus">輕度肥胖</div>
+            <div class="bminame">BMI <strong>11.94</strong> </div>
+            <div class="bminame">weight <strong>40kg</strong> </div>
+            <div class="bminame">height <strong>180cm</strong> </div>
+            <div class="bmidata">06-19-2017</div>
+          </div>
+          <div class="bmibox">
+            <div class="bmicolor" id="moderately-fat">&nbsp;</div>
+            <div class="bmistatus">中度肥胖</div>
+            <div class="bminame">BMI <strong>11.94</strong> </div>
+            <div class="bminame">weight <strong>40kg</strong> </div>
+            <div class="bminame">height <strong>180cm</strong> </div>
+            <div class="bmidata">06-19-2017</div>
+          </div>
+          <div class="bmibox">
+            <div class="bmicolor" id="severe-obesity">&nbsp;</div>
+            <div class="bmistatus">重度肥胖</div>
+            <div class="bminame">BMI <strong>11.94</strong> </div>
+            <div class="bminame">weight <strong>40kg</strong> </div>
+            <div class="bminame">height <strong>180cm</strong> </div>
+            <div class="bmidata">06-19-2017</div>
+          </div>
         </div>
     </div>
         <div id="bmifoot">
