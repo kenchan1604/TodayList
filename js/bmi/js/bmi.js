@@ -1,12 +1,19 @@
+//設定
 var allbtn = document.querySelector('#all_btn');
 var btn = document.querySelector('#bmibut_btn');
 var bmiresults = document.querySelector('.bmiresults');
 var resetbtn = document.querySelector('.reset_btn');
 var bmiresultsname = document.querySelector('.bmiresultsname');
 var bmistatus = document.querySelector('.bmistatus');
+var bmistatusbox = document.querySelector('.bmistatusbox');
+var userbmidata = JSON.parse(localStorage.getItem('user_bmi_data')) || [];
 
+
+// 功能與更新
 btn.addEventListener('click',checkbmi);
 resetbtn.addEventListener('click',checkbmi);
+updateList(userbmidata);
+
 
 function checkbmi(){
 	console.log("check BMI");
@@ -48,59 +55,96 @@ function checkbmi(){
 		bmiresultsname.style.display='block';
 		resetbtn.style.display='block';
 		document.querySelector('#bmistatus').innerHTML = "" + bmi + "<br><strong>BMI</strong>";
-		bmilevel(bmi);
+		bmilevel(bmi,bdy_height,bdy_weight);
 		bmibox(bmi,bdy_height,bdy_weight);
     }
 }
+
 function bmibox(bmi,bdy_height,bdy_weight){
+	//document.querySelector('.bminamebox').innerHTML = "BMI <strong>" + bmi + "</strong>";
+	//document.querySelector('.weightbox').innerHTML = "weight <strong>" + bdy_weight + " kg </strong>";
+	//document.querySelector('.heightbox').innerHTML = "height <strong>" + bdy_height + " cm </strong>";
+	//document.querySelector('.bmidata').innerHTML = NowMonth + "-" + ('0'+ NowDate.getDate()).substr(-2) + "-" + NowDate.getFullYear();
+	}
+// 計算BMI指數
+function bmilevel(bmi,bdy_height,bdy_weight){
+	var bmirs = 'XX';
+	var bmicolor;
+	if(bmi<18.5){
+		bmirs="過輕";
+		bmicolor="too-light";
+		console.log(bmirs);
+		bmiresultsname.innerHTML = bmirs;
+		bmiresults.setAttribute('id','rs-too-light');
+		bmiresultsname.setAttribute('id','rsn-too-light');
+		resetbtn.setAttribute('id','rtbtn-too-light');
+	}else if(bmi<24){
+		bmirs="理想";
+		bmicolor="good";
+		console.log(bmirs);
+		bmiresultsname.innerHTML = bmirs;
+		bmiresults.setAttribute('id','rs-good');
+		bmiresultsname.setAttribute('id','rsn-good');
+		resetbtn.setAttribute('id','rtbtn-good');
+	}else if(bmi<27){
+		bmirs="過重";
+		bmicolor="too-heavy";
+		console.log(bmirs);
+		bmiresultsname.innerHTML = bmirs;
+		bmiresults.setAttribute('id','rs-too-heavy');
+		bmiresultsname.setAttribute('id','rsn-too-heavy');
+		resetbtn.setAttribute('id','rtbtn-too-heavy');
+	}else if(bmi<30){
+		bmirs="輕度肥胖";
+		bmicolor="mild-obese";
+		console.log(bmirs);
+		bmiresultsname.innerHTML = bmirs;
+		bmiresults.setAttribute('id','rs-mild-obese');
+		bmiresultsname.setAttribute('id','rsn-mild-obese');
+		resetbtn.setAttribute('id','rtbtn-mild-obese');
+	}else if(bmi<40){
+		bmirs="中度肥胖";
+		bmicolor="moderately-fat";
+		console.log(bmirs);
+		bmiresultsname.innerHTML = bmirs;
+		bmiresults.setAttribute('id','rs-moderately-fat');
+		bmiresultsname.setAttribute('id','rsn-moderately-fat');
+		resetbtn.setAttribute('id','rtbtn-moderately-fat');
+	}
+	else if(bmi>40){
+		bmirs="重度肥胖";
+		bmicolor="severe-obesity";
+		console.log(bmirs);
+		bmiresultsname.innerHTML = bmirs;
+		bmiresults.setAttribute('id','rs-severe-obesity');
+		bmiresultsname.setAttribute('id','rsn-severe-obesity');
+		resetbtn.setAttribute('id','rtbtn-severe-obesity');
+	}
+	var bmitxt = document.querySelector('.allbmibox').value;
+		var bmialltxt = {
+			bmicolor: bmicolor,
+			bmiresults: bmirs,
+			bmi: bmi,
+			height: bdy_height,
+			weight: bdy_weight
+		};
+		userbmidata.push(bmialltxt)
+		updateList(userbmidata);
+		localStorage.setItem('listData',JSON.stringify(userbmidata));
+}
+// 更新網頁內容
+function updateList(items) {
 	var NowDate = new Date();
 	var NowMonth = '0'+ (NowDate.getMonth()+1);
 	//getMonth()方法依據當地時間來傳回日期物件中的月份，傳回值是一個0到11的正整數，0代表一月，1代表二月，以此類推。
 	NowMonth = NowMonth.substr(-2);
 	console.log(NowDate);
 	console.log(NowMonth);
-	document.querySelector('.bminamebox').innerHTML = "BMI <strong>" + bmi + "</strong>";
-	document.querySelector('.weightbox').innerHTML = "weight <strong>" + bdy_weight + " kg </strong>";
-	document.querySelector('.heightbox').innerHTML = "height <strong>" + bdy_height + " cm </strong>";
-	document.querySelector('.bmidata').innerHTML = NowMonth + "-" + ('0'+ NowDate.getDate()).substr(-2) + "-" + NowDate.getFullYear();
-	}
-function bmilevel(bmi,bdy_height,bdy_weight){
-	if(bmi<18.5){
-		console.log("過輕");
-		bmiresultsname.innerHTML = "過輕";
-		bmiresults.setAttribute('id','rs-too-light');
-		bmiresultsname.setAttribute('id','rsn-too-light');
-		resetbtn.setAttribute('id','rtbtn-too-light');
-	}else if(bmi<24){
-		console.log("正常");
-		bmiresultsname.innerHTML = "正常";
-		bmiresults.setAttribute('id','rs-good');
-		bmiresultsname.setAttribute('id','rsn-good');
-		resetbtn.setAttribute('id','rtbtn-good');
-	}else if(bmi<27){
-		console.log("過重");
-		bmiresultsname.innerHTML = "過重";
-		bmiresults.setAttribute('id','rs-too-heavy');
-		bmiresultsname.setAttribute('id','rsn-too-heavy');
-		resetbtn.setAttribute('id','rtbtn-too-heavy');
-	}else if(bmi<30){
-		console.log("輕度肥胖");
-		bmiresultsname.innerHTML = "輕度肥胖";
-		bmiresults.setAttribute('id','rs-mild-obese');
-		bmiresultsname.setAttribute('id','rsn-mild-obese');
-		resetbtn.setAttribute('id','rtbtn-mild-obese');
-	}else if(bmi<40){
-		console.log("中度肥胖");
-		bmiresultsname.innerHTML = "中度肥胖";
-		bmiresults.setAttribute('id','rs-moderately-fat');
-		bmiresultsname.setAttribute('id','rsn-moderately-fat');
-		resetbtn.setAttribute('id','rtbtn-moderately-fat');
-	}
-	else if(bmi>40){
-		console.log("重度肥胖");
-		bmiresultsname.innerHTML = "重度肥胖";
-		bmiresults.setAttribute('id','rs-severe-obesity');
-		bmiresultsname.setAttribute('id','rsn-severe-obesity');
-		resetbtn.setAttribute('id','rtbtn-severe-obesity');
-	}
-	}
+    str = '';
+    var len = items.length;
+    //console.log(items);
+    for (var i = 0; len > i; i++) {
+        str += "<div class='bmibox'><div class='bmicolor' id=" + items[i].bmicolor + ">&nbsp;</div><div class='bmistatusbox'>" + items[i].bmiresults + "</div><div class='bminame' id='bminamebox'> BMI : <strong> " + items[i].bmi + " </strong></div><div class='bminame' id='weightbox'>weight <strong> " + items[i].weight + " kg </strong></div><div class='bminame' id='heightbox'>height <strong> " + items[i].height + " cm</strong></div><div class='bmidata'> " + NowMonth + "-" + ('0'+ NowDate.getDate()).substr(-2) + "-" + NowDate.getFullYear() + "</div></div>";
+    }
+    document.querySelector('.allbmibox').innerHTML = str;
+}
