@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<h1>姓氏為 {{lastname}} 家族成員:</h1>
+<ul>
+	<li ng-repeat="n in names">{{lastname}} {{n}}</li>
+</ul>
+<p>查詢姓氏為 {{lastname}} 的 長子</p>
+<button ng-click='inquire()'>查詢</button><br><br>
+{{show}}
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('myCtrl', function($scope, $rootScope) {
+    $scope.names = ["大明", "小明", "大芬", "小芬"];
+    $rootScope.lastname = "陳";
+    $scope.inquire = function() {
+    	$scope.show = $scope.lastname+" "+$scope.names[0];
+	};
+});
+</script>
+
+<p>注意 $rootScope 在循環對象內外都可以訪問。</p>
+
+</body>
+</html>
