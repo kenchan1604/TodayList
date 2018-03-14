@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<style>
+input.ng-invalid {
+    background-color: red;
+}
+input.ng-valid {
+    background-color: green;
+}
+
+/*
+ng-valid: 驗證通過
+ng-invalid: 驗證失敗
+ng-valid-[key]: 由$setValidity添加的所有驗證通過的值
+ng-invalid-[key]: 由$setValidity添加的所有驗證失敗的值
+ng-pristine: 控件為初始狀態
+ng-dirty: 控件輸入值已變更
+ng-touched: 控件已失去焦點
+ng-untouched: 控件未失去焦點
+ng-pending: 任何為滿足$asyncValidators的情況
+*/
+</style>
+</head>
+<body>
+
+<form ng-app="" name="myForm" ng-init="myText = 'test@test.com'">
+    Email:
+    <input type="email" name="myAddress" ng-model="myText" required>
+    <span ng-show="myForm.myAddress.$error.email">你輸入不是一個正確的郵箱地址格式</span>
+<p>在輸入框中輸入你的郵箱地址，如果不是一個正確的郵箱地址格式，會彈出提示信息。</p>
+<h1>狀態</h1>
+<p>Valid: {{myForm.myAddress.$valid}} (如果輸入的值是合法的則為 true)。 </p>
+<p>Dirty: {{myForm.myAddress.$dirty}} (如果值改變則為 true)。 </p>
+<p>Touched: {{myForm.myAddress.$touched}} (如果通過觸屏點擊則為 true)。 </p>
+</form>
+</body>
+</html>
