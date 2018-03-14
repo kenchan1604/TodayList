@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body ng-app="myApp">
+
+<qq></qq><!-- 自定義指令 不能大寫 -->
+<div qq></div>
+<div class="qq02"></div>
+
+<script>
+var app = angular.module("myApp", []);
+app.directive("qq", function() {
+    return {
+        template : "<h1>qq自定義指令!</h1>"
+    };
+});
+app.directive("qq02", function() {
+    return {
+    	restrict : "C",
+    	// E 作為元素名使用
+		// A 作為屬性使用
+		// C 作為類名使用
+		// M 作為註釋使用
+		// restrict 默認值為 EA, 即可以通過元素名和屬性名來調用指令。
+        template : "<h1>class 必須設置 restrict 的值為 \"C\" 才能通過類名來調用指令。!</h1>"
+    };
+});
+
+</script>
+
+</body>
+</html>
