@@ -103,13 +103,19 @@ function bmilevel(bmi,bdy_height,bdy_weight){
 		bmiresultsname.setAttribute('id','rsn-severe-obesity');
 		resetbtn.setAttribute('id','rtbtn-severe-obesity');
 	}
+	var NowDate = new Date();
+	var NowMonth = '0'+ (NowDate.getMonth()+1);
+	//getMonth()方法依據當地時間來傳回日期物件中的月份，傳回值是一個0到11的正整數，0代表一月，1代表二月，以此類推。
+	NowMonth = NowMonth.substr(-2);
+	bmidata = NowMonth + "-" + ('0'+ NowDate.getDate()).substr(-2) + "-" + NowDate.getFullYear();
 	var bmitxt = allbmibox.value;
 		var bmialltxt = {
 			bmicolor: bmicolor,
 			bmiresults: bmirs,
 			bmi: bmi,
 			height: bdy_height,
-			weight: bdy_weight
+			weight: bdy_weight,
+			bmidata: bmidata
 		};
 		userbmidata.push(bmialltxt)
 		updateList(userbmidata);
@@ -117,14 +123,10 @@ function bmilevel(bmi,bdy_height,bdy_weight){
 }
 // 更新網頁內容
 function updateList(items) {
-	var NowDate = new Date();
-	var NowMonth = '0'+ (NowDate.getMonth()+1);
-	//getMonth()方法依據當地時間來傳回日期物件中的月份，傳回值是一個0到11的正整數，0代表一月，1代表二月，以此類推。
-	NowMonth = NowMonth.substr(-2);
     str = '';
     var len = items.length;
     for (var i = 0; len > i; i++) {
-        str += "<div class='bmibox'><div class='bmicolor' id=" + items[i].bmicolor + ">&nbsp;</div><div class='bmistatusbox'>" + items[i].bmiresults + "</div><div class='bminame' id='bminamebox'> BMI : <strong> " + items[i].bmi + " </strong></div><div class='bminame' id='weightbox'>weight <strong> " + items[i].weight + " kg </strong></div><div class='bminame' id='heightbox'>height <strong> " + items[i].height + " cm</strong></div><div class='bmidata'> " + NowMonth + "-" + ('0'+ NowDate.getDate()).substr(-2) + "-" + NowDate.getFullYear() + "</div><div class='deletebmi_btn'><a href=\"#\" data-index=" + i + " /><i class='fas fa-times' data-index=" + i + "></i></a></div></div>";
+        str += "<div class='bmibox'><div class='bmicolor' id=" + items[i].bmicolor + ">&nbsp;</div><div class='bmistatusbox'>" + items[i].bmiresults + "</div><div class='bminame' id='bminamebox'> BMI : <strong> " + items[i].bmi + " </strong></div><div class='bminame' id='weightbox'>weight <strong> " + items[i].weight + " kg </strong></div><div class='bminame' id='heightbox'>height <strong> " + items[i].height + " cm</strong></div><div class='bmidata'> " + items[i].bmidata + "</div><div class='deletebmi_btn'><a href=\"#\" data-index=" + i + " /><i class='fas fa-times' data-index=" + i + "></i></a></div></div>";
     }
     allbmibox.innerHTML = str;
 }
