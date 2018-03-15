@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="siteCtrl">
+<ul>
+	{{ error }}
+  <li ng-repeat="x in names">
+    {{ x.name }}
+  </li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('siteCtrl', function($scope, $http) {
+	$http({
+		method: 'GET',
+		url: 'https://hexschool.github.io/ajaxHomework/data.json'
+	}).then(function successCallback(response) {
+			$scope.error = "請求成功";
+			$scope.names = response.data;
+		}, function errorCallback(response) {
+			$scope.error = "請求失敗";
+	});
+  
+});
+</script>
+
+</body>
+</html>
