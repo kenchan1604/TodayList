@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="personCtrl">
+件數: <input type="number" ng-model="quantity"><br>
+售價: <input type="number" ng-model="price">
+<p>總價 = {{ (quantity * price) | currency }}</p>
+
+<p>姓為大寫 : {{ firstName | uppercase }}</p>
+<p>姓為小寫 {{ firstName | lowercase }}</p>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('personCtrl', function($scope) {
+    $scope.firstName = "Chan";
+});
+</script>
+<!--
+currency 格式化數字為貨幣格式。
+filter 從數組項中選擇一個子集。
+lowercase 格式化字符串為小寫。
+orderBy 根據某個表達式排列數組。
+uppercase 格式化字符串為大寫。
+-->
+</body>
+</html>
