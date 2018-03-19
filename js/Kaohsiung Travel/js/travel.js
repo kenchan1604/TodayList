@@ -1,30 +1,34 @@
-var xhr = new XMLHttpRequest();
-var data;
-xhr.open('get','https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97',true)
-xhr.send(null);
-xhr.onload = function(){
-	var area= [];
-	var arealist= [];
-    data = JSON.parse(xhr.responseText);
-    data = data.result.records;
-    for (var i = 0; data.length > i; i++) {
-	  arealist.push(data[i].Zone);
-	}
-	// 判斷是否重覆
-	arealist.forEach(function (value) {
-	  if (area.indexOf(value) == -1) {
-	    area.push(value);
-	  }
-	});
-	areaUpdated(area);
-}
 // MOD 設定
 var selectlist = document.querySelector('#selectlist');
 var title = document.querySelector('.title');
 var hotbox = document.querySelector('.hotbox');
 var travelbox = document.querySelector('.travelbox');
-
-// // 功能與更新
+// 資料 設定
+var data = [0,0];
+var xhr = new XMLHttpRequest();
+xhr.open('get','https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97',true);
+xhr.send(null);
+xhr.onload = function(){
+  if(xhr.status==200){
+    var area= [];
+    var arealist= [];
+      data = JSON.parse(xhr.responseText);
+      data = data.result.records;
+      for (var i = 0; data.length > i; i++) {
+      arealist.push(data[i].Zone);
+    }
+    // 判斷是否重覆
+    arealist.forEach(function (value) {
+      if (area.indexOf(value) == -1) {
+        area.push(value);
+      }
+    });
+    areaUpdated(area);
+  }else{
+    travelbox.innerHTML = "沒法連接資料庫 status: " + xhr.status + " readyState: " + xhr.readyState;
+  }
+}
+// 功能與更新
 selectlist.addEventListener('change', updatedList);
 hotbox.addEventListener('click', hotlist);
 
@@ -51,6 +55,7 @@ function hotlist(e) {
 //更新網頁
 function updatedList(e) {
   var str = '';
+  $('html,body').animate({scrollTop:$('.title').offset().top}, 1500);
   for (var i = 0; i < data.length; i++) {
     if (data[i].Zone == e.target.value) {
       title.textContent = data[i].Zone;
